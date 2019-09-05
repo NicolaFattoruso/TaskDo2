@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Task Do</string>
+    <string name="addButton">Aggiungi</string>
+    <string name="addTaskButton">Aggiungi obbiettivo</string>
+    <string name="cancel">Annulla</string>
+    <string name="delete">Elimina</string>
+    <string name="deleteConfirmation">"Sei sicuro di voler eliminare l'obbiettivo: "</string>
+    <string name="insertTaskHint">Scrivi il nome del tuo prossimo obbiettivo:</string>
+    <string name="nukeConfirmation">Sei sicuro di voler eleminare tutti gli obbiettivi?</string>
+    <string name="taskNameHint">Nome dell\'obbietivo..</string>
+    <string name="tutorial">Fai tap su un obbiettivo per marcarlo come fatto! Premi a lungo per eliminarlo.</string>
+    <string name="warning">Attenzione</string>
+    <string name="addNameToast">Scrivi un nome per il tuo obbiettivo</string>
+    <string name="insertTaskTime">Quando?</string>
+    <string name="insertTimeHint">Premi l\'icona dell\'orologio per aggiungere un orario al tuo obbiettivo, premi il bottone sulla destra per aggiungerlo alla tua lista!</string>
+    <string name="timeNotSet">Non hai ancora inserito l\'orario!</string>
+</resources>
