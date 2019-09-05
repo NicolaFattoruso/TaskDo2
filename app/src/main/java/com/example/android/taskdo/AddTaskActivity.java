@@ -90,7 +90,7 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
     /**
      * Function that controls the time inserted by the user in the timePicker
      *
-     * @param view
+     * @param view view?
      * @param hourOfDay inserted by the user in the timePicker
      * @param minute    inserted by the user in the timePicker
      */
@@ -104,8 +104,8 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
 
 
     /**
-     * @param hour
-     * @param minute
+     * @param hour hour of time to be formatted
+     * @param minute minute of time to be formatted
      * @param is24HourFormat true if the System is using 24h format, false otherwise
      * @return a formatted string for the time according to user locale
      */
