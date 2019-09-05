@@ -44,7 +44,7 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 
     //Design support
-    implementation 'androidx.core:core:1.0.0'
+    implementation 'androidx.core:core:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'
 
     //Google AdMob

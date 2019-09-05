@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity {
         taskList = db.TaskDao().getAllTasks();
 
 
-        /** Create a {@link TaskAdapter}, whose data source is a list of
+        /*
+         * Create a {@link TaskAdapter}, whose data source is a list of
          {@link Task}s. The adapter knows how to create list item views for each item
          in the list. */
         final TaskAdapter taskAdapter = new TaskAdapter(this, taskList);
@@ -102,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Requests a confirmation from the user before deleting everything
      *
-     * @param view
+     * @param view view?
      * @param db          is the database where all entries are stored
      * @param taskAdapter needed to update the listview on screen
      */
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * @param view
+     * @param view view?
      * @param db is the database with all items
      * @param taskAdapter is the adapter which takes care of displaying all tasks
      * @param position  is the position in which the adapter is currently
