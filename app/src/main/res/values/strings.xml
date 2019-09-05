@@ -15,4 +15,6 @@
     <string name="insertTaskTime">When?</string>
     <string name="insertTimeHint">Press the clock icon to add a time for your task, press the button on the right to add it to your list!</string>
     <string name="timeNotSet">Time is not yet set!</string>
+
+
 </resources>
