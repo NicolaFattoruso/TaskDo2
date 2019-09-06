@@ -2,7 +2,6 @@ package com.example.android.taskdo;
 
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -56,12 +53,6 @@ public class TuesdayFragment extends Fragment {
         ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(taskAdapter);
 
-        //Find FAB for adding a task
-        FloatingActionButton addTaskFab = rootView.findViewById(R.id.add_task_fab);
-
-//        //Find FAB to remove all tasks
-//        FloatingActionButton removeTasksFab = rootView.findViewById(R.id.remove_tasks_fab);
-
         //Sets an onClickListener on each item of the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -85,40 +76,14 @@ public class TuesdayFragment extends Fragment {
             }
         });
 
-        //Sets a click Listener on the RemoveTaskFab and calls showAlertNukeButtonClicked()
-//        removeTasksFab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                //Shows the user an Alert before deleting all items from the list
-//                showAlertNukeButtonClicked(view, db, taskAdapter);
-//            }
-//        });
-//
-//        addTaskFab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                addTaskIntent();
-//                getActivity().finish();
-//            }
-//        });
-
         return rootView;
-    }
-
-
-
-    /**
-     * Function that starts another activity to get the name of the Task
-     */
-    private void addTaskIntent() {
-        startActivity(new Intent(getActivity(), AddTaskActivity.class));
     }
 
 
     /**
      * Requests a confirmation from the user before deleting everything
      *
-     * @param view view?
+     * @param view        view?
      * @param db          is the database where all entries are stored
      * @param taskAdapter needed to update the listview on screen
      */
@@ -148,10 +113,10 @@ public class TuesdayFragment extends Fragment {
     }
 
     /**
-     * @param view view?
-     * @param db is the database with all items
+     * @param view        view?
+     * @param db          is the database with all items
      * @param taskAdapter is the adapter which takes care of displaying all tasks
-     * @param position  is the position in which the adapter is currently
+     * @param position    is the position in which the adapter is currently
      */
     public void showAlertOnDeletion(View view, final AppDatabase db,
                                     final TaskAdapter taskAdapter, final int position) {

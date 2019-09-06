@@ -2,7 +2,6 @@ package com.example.android.taskdo;
 
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +12,6 @@ import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
-
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -56,8 +53,7 @@ public class MondayFragment extends Fragment {
         ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(taskAdapter);
 
-        //Find FAB for adding a task
-        FloatingActionButton addTaskFab = rootView.findViewById(R.id.add_task_fab);
+
 
         //Sets an onClickListener on each item of the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -83,25 +79,10 @@ public class MondayFragment extends Fragment {
         });
 
 
-        addTaskFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addTaskIntent();
-                getActivity().finish();
-            }
-        });
-
         return rootView;
     }
 
 
-
-    /**
-     * Function that starts another activity to get the name of the Task
-     */
-    private void addTaskIntent() {
-        startActivity(new Intent(getActivity(), AddTaskActivity.class));
-    }
 
 
     /**
@@ -110,7 +91,7 @@ public class MondayFragment extends Fragment {
      * @param taskAdapter is the adapter which takes care of displaying all tasks
      * @param position  is the position in which the adapter is currently
      */
-    public void showAlertOnDeletion(View view, final AppDatabase db,
+    private void showAlertOnDeletion(View view, final AppDatabase db,
                                     final TaskAdapter taskAdapter, final int position) {
 
         //Retrieve currentTask from adapter

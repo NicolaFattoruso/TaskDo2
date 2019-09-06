@@ -1,6 +1,7 @@
 package com.example.android.taskdo;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -12,12 +13,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-
-    List<Task> taskList;
 
 
     @Override
@@ -31,23 +28,13 @@ public class MainActivity extends AppCompatActivity {
         final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "database")
                 .allowMainThreadQueries().build();
 
-        //Loads the tasks from the database
-        taskList = db.TaskDao().getAllTasks();
 
         //FAB to remove all tasks
         FloatingActionButton removeTasksFab = findViewById(R.id.remove_tasks_fab);
 
-        //Sets a click Listener on the RemoveTaskFab and calls showAlertNukeButtonClicked()
-        removeTasksFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Shows the user an Alert before deleting all items from the list
-                showAlertNukeButtonClicked(view, db);
-            }
-        });
 
         // Find the view pager that will allow the user to swipe between fragments
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        ViewPager viewPager = findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
         SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
@@ -56,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(adapter);
 
         // Find the tab layout that shows the tabs
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        TabLayout tabLayout = findViewById(R.id.tabs);
 
         // Connect the tab layout with the view pager. This will
         //   1. Update the tab layout when the view pager is swiped
@@ -65,6 +52,34 @@ public class MainActivity extends AppCompatActivity {
         //      by calling onPageTitle()
         tabLayout.setupWithViewPager(viewPager);
 
+        //Find FAB for adding a task
+        FloatingActionButton addTaskFab = findViewById(R.id.add_task_fab);
+
+        addTaskFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addTaskIntent();
+                finish();
+            }
+        });
+
+        //Sets a click Listener on the RemoveTaskFab and calls showAlertNukeButtonClicked()
+        removeTasksFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Shows the user an Alert before deleting all items from the list
+                //TODO NEEDS TO NOTIFY DATASET, NOT WORKING PROPERLY NOW
+                showAlertNukeButtonClicked(view, db);
+            }
+        });
+
+    }
+
+    /**
+     * Function that starts another activity to get the name of the Task
+     */
+    private void addTaskIntent() {
+        startActivity(new Intent(this, AddTaskActivity.class));
     }
 
 
@@ -72,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
      * Requests a confirmation from the user before deleting everything
      *
      * @param view view?
-     * @param db          is the database where all entries are stored
-     *
+     * @param db   is the database where all entries are stored
      */
     public void showAlertNukeButtonClicked(View view, final AppDatabase db) {
         // setup the alert builder
@@ -85,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
         builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //Deletes all items from the List
-                taskList.clear();
                 //Deletes all entries in the Database
                 db.TaskDao().nukeTable();
             }
