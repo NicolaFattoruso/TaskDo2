@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 /**
@@ -13,7 +12,7 @@ import androidx.room.PrimaryKey;
  */
 @Entity(tableName = "tasks")
 public class Task {
-    private static final String TAG="Task";
+    private static final String TAG = "Task";
 
 
     @PrimaryKey(autoGenerate = true)
@@ -23,7 +22,7 @@ public class Task {
      * Name of the task
      */
     @ColumnInfo(name = "task_name")
-    private String taskName;
+    private String name;
 
     /**
      * Variable to keep of the status of the task [Done or Not Done]
@@ -31,18 +30,23 @@ public class Task {
     @ColumnInfo(name = "task_status")
     private Boolean taskStatus;
     /**
-     * Each task has its own time
+     * Each task has its own time and day
      */
     @ColumnInfo(name = "hour")
     private int hour;
     @ColumnInfo(name = "minute")
     private int minute;
 
-    public Task(String taskName, Boolean taskStatus, int hour, int minute) {
-        this.taskName = taskName;
+    @ColumnInfo(name = "day")
+    private int day;
+
+
+    public Task(String name, Boolean taskStatus, int hour, int minute, int day) {
+        this.name = name;
         this.taskStatus = taskStatus;
         this.hour = hour;
         this.minute = minute;
+        this.day = day;
     }
 
 
@@ -51,8 +55,8 @@ public class Task {
     /**
      * @return the name of the Task
      */
-    public String getTaskName() {
-        return taskName;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -74,14 +78,18 @@ public class Task {
         return this.minute;
     }
 
+    public int getDay() {
+        return this.day;
+    }
+
     //SETTERS
 
     public void setID(@NonNull Long ID) {
         this.ID = ID;
     }
 
-    public void setTaskName(String taskName) {
-        this.taskName = taskName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setTaskStatus(Boolean taskStatus) {
@@ -91,8 +99,7 @@ public class Task {
     public void setTaskHour(int hour) {
         if (hour > 0 && hour < 24)
             this.hour = hour;
-        else
-        {
+        else {
             Log.d(TAG, "Hour is not valid.");
         }
     }
@@ -100,10 +107,14 @@ public class Task {
     public void setTaskMinute(int minute) {
         if (minute >= 0 && minute <= 60)
             this.minute = minute;
-        else
-        {
+        else {
             Log.d(TAG, "Minute is not valid.");
         }
+    }
+
+    public void setDay(int day) {
+        if (day < 7 && day >= 0)
+            this.day = day;
     }
 
     //PUBLIC METHODS
@@ -116,7 +127,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task Name: " + taskName;
+        return "Task Name: " + name + "\nTask day: " + day;
     }
 }
 

@@ -21,6 +21,9 @@ import java.util.List;
 public class TuesdayFragment extends Fragment {
     private static final String TAG = "MondayFragment";
 
+    private static final int DAY = 1;
+
+
     List<Task> taskList;
 
 
@@ -36,11 +39,11 @@ public class TuesdayFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.task_list, container, false);
 
         //Database?!
-        final AppDatabase db = Room.databaseBuilder(getContext(), AppDatabase.class, "tuesdayDb")
+        final AppDatabase db = Room.databaseBuilder(getContext(), AppDatabase.class, "database")
                 .allowMainThreadQueries().build();
 
         //Loads the tasks from the database
-        taskList = db.TaskDao().getAllTasks();
+        taskList = db.TaskDao().getTasksByDay(DAY);
 
 
         /*
@@ -128,14 +131,14 @@ public class TuesdayFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //Set title and message for the warning
         builder.setTitle(getString(R.string.warning));
-        builder.setMessage(getString(R.string.deleteConfirmation) + currentTask.getTaskName() + " ?");
+        builder.setMessage(getString(R.string.deleteConfirmation) + currentTask.getName() + " ?");
         // add the buttons
         builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //remove current entry from the database and from the List
-                db.TaskDao().deleteTaskById(currentTask.getID());
+                db.TaskDao().deleteTasksById(currentTask.getID());
                 taskList.remove(position);
                 taskAdapter.notifyDataSetChanged();
             }

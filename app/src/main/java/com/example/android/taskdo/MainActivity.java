@@ -16,6 +16,12 @@ import com.google.android.material.tabs.TabLayout;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
+    OnTableNukedListener callback;
+
+    public void setOnTableNukedListener(OnTableNukedListener callback) {
+        this.callback = callback;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Find the view pager that will allow the user to swipe between fragments
-        ViewPager viewPager = findViewById(R.id.viewpager);
+        final ViewPager viewPager = findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
         SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
@@ -52,24 +58,15 @@ public class MainActivity extends AppCompatActivity {
         //      by calling onPageTitle()
         tabLayout.setupWithViewPager(viewPager);
 
-        //Find FAB for adding a task
-        FloatingActionButton addTaskFab = findViewById(R.id.add_task_fab);
+        /*
+            TRYING AGAIN
+        */
 
+        FloatingActionButton addTaskFab = findViewById(R.id.add_task_fab);
         addTaskFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addTaskIntent();
-                finish();
-            }
-        });
-
-        //Sets a click Listener on the RemoveTaskFab and calls showAlertNukeButtonClicked()
-        removeTasksFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Shows the user an Alert before deleting all items from the list
-                //TODO NEEDS TO NOTIFY DATASET, NOT WORKING PROPERLY NOW
-                showAlertNukeButtonClicked(view, db);
+                addTaskIntent(viewPager.getCurrentItem());
             }
         });
 
@@ -78,8 +75,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Function that starts another activity to get the name of the Task
      */
-    private void addTaskIntent() {
-        startActivity(new Intent(this, AddTaskActivity.class));
+    private void addTaskIntent(int currentPage) {
+        Intent addIntent = new Intent(this, AddTaskActivity.class);
+        addIntent.putExtra("currentPage", currentPage);
+        startActivity(addIntent);
     }
 
 

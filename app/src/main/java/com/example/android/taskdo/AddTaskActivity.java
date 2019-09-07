@@ -1,25 +1,26 @@
 package com.example.android.taskdo;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.room.Room;
-import androidx.room.util.StringUtil;
-
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+import androidx.room.Room;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import android.text.format.DateFormat;
-
 public class AddTaskActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
+
+    private static final String TAG = "AddTaskActivity";
 
     String taskName = "";
     //Initializing hour and minute to not valid values,
@@ -31,6 +32,13 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+
+        Intent starterIntent = getIntent();
+        final int currentDay = starterIntent.getIntExtra("currentPage", 0);
+        Log.d(TAG, "Current page which has pressed add is : " + currentDay);
+
+
+
 
         //Find the the editable text view and save the name of the task into taskName string
         final EditText taskNameEdit = findViewById(R.id.task_name_edit);
@@ -57,7 +65,7 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
                     Toast.makeText(AddTaskActivity.this, getString(R.string.addNameToast), Toast.LENGTH_SHORT).show();
                 } else {
                     //If the new task is valid, then it gets added into our database
-                    db.TaskDao().insertTasks(new Task(taskName, false, hour, minute));
+                    db.TaskDao().insertTasks(new Task(taskName, false, hour, minute, currentDay));
                     //The user is then redirected back to the Main Activity
                     startActivity(new Intent(AddTaskActivity.this, MainActivity.class));
                     finish();

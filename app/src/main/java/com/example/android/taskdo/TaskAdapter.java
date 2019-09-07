@@ -3,7 +3,6 @@ package com.example.android.taskdo;
 import android.app.Activity;
 import android.graphics.Paint;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,8 +12,6 @@ import android.widget.TextView;
 
 import androidx.room.Room;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 public class TaskAdapter extends ArrayAdapter<Task> {
@@ -93,7 +90,7 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         ImageView statusImageView = listItemView.findViewById(R.id.status_image);
 
         //Fixes the view according to the status of the task
-        taskName.setText(currentTask.getTaskName());
+        taskName.setText(currentTask.getName());
         if (currentTask.getTaskStatus() == true) {
             taskName.setPaintFlags(taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             statusImageView.setImageResource(R.drawable.outline_assignment_turned_in_black_24);

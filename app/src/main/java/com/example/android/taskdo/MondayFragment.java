@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -18,8 +19,11 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MondayFragment extends Fragment {
+public class MondayFragment extends Fragment implements OnTableNukedListener{
+
     private static final String TAG = "MondayFragment";
+
+    private static final int DAY = 0;
 
     List<Task> taskList;
 
@@ -40,7 +44,7 @@ public class MondayFragment extends Fragment {
                 .allowMainThreadQueries().build();
 
         //Loads the tasks from the database
-        taskList = db.TaskDao().getAllTasks();
+        taskList = db.TaskDao().getTasksByDay(DAY);
 
 
         /*
@@ -101,14 +105,14 @@ public class MondayFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         //Set title and message for the warning
         builder.setTitle(getString(R.string.warning));
-        builder.setMessage(getString(R.string.deleteConfirmation) + currentTask.getTaskName() + " ?");
+        builder.setMessage(getString(R.string.deleteConfirmation) + currentTask.getName() + " ?");
         // add the buttons
         builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //remove current entry from the database and from the List
-                db.TaskDao().deleteTaskById(currentTask.getID());
+                db.TaskDao().deleteTasksById(currentTask.getID());
                 taskList.remove(position);
                 taskAdapter.notifyDataSetChanged();
             }
@@ -119,5 +123,9 @@ public class MondayFragment extends Fragment {
         dialog.show();
     }
 
+    @Override
+    public void onNukeButtonPressed() {
+        Toast.makeText(getActivity(), "Button has been pressed, Sir", Toast.LENGTH_SHORT).show();
+    }
 }
 
