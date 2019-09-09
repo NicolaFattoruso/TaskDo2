@@ -18,18 +18,18 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TuesdayFragment extends Fragment {
-    private static final String TAG = "MondayFragment";
+public class SaturdayFragment extends Fragment {
 
-    private static final int DAY = 1;
+    private static final String TAG = "SaturdayFragment";
 
+    private static final int DAY = 5;
 
     private List<Task> taskList;
 
     private TaskAdapter taskAdapter;
 
 
-    public TuesdayFragment() {
+    public SaturdayFragment() {
         // Required empty public constructor
     }
 
@@ -40,23 +40,24 @@ public class TuesdayFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.task_list, container, false);
 
-        //DATABASE
+        //Database?!
         final AppDatabase db = Room.databaseBuilder(getContext(), AppDatabase.class, "database")
                 .allowMainThreadQueries().build();
 
         //Loads the tasks from the database
         taskList = db.TaskDao().getTasksByDay(DAY);
 
-
         /*
-         * Create a {@link TaskAdapter}, whose data source is a list of
-         Tasks. The adapter knows how to create list item views for each item
-         in the list. */
+        * Create a {@link TaskAdapter}, whose data source is a list of
+        {@link Task}s. The adapter knows how to create list item views for each item
+        in the list. */
         taskAdapter = new TaskAdapter(getActivity(), taskList);
+
 
         // Get a reference to the ListView, and attach the adapter to the listView.
         ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(taskAdapter);
+
 
         //Sets an onClickListener on each item of the ListView
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -81,6 +82,7 @@ public class TuesdayFragment extends Fragment {
             }
         });
 
+
         return rootView;
     }
 
@@ -89,8 +91,8 @@ public class TuesdayFragment extends Fragment {
      * @param taskAdapter is the adapter which takes care of displaying all tasks
      * @param position    is the position in which the adapter is currently
      */
-    public void showAlertOnDeletion(final AppDatabase db,
-                                    final TaskAdapter taskAdapter, final int position) {
+    private void showAlertOnDeletion(final AppDatabase db,
+                                     final TaskAdapter taskAdapter, final int position) {
 
         //Retrieve currentTask from adapter
         final Task currentTask = taskList.get(position);

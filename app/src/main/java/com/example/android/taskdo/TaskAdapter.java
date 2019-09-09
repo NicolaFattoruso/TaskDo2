@@ -10,8 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.room.Room;
-
 import java.util.List;
 
 public class TaskAdapter extends ArrayAdapter<Task> {
@@ -30,11 +28,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
     public TaskAdapter(Activity context, List<Task> tasks) {
         super(context, 0, tasks);
     }
-
-    //Database?!
-    final AppDatabase db = Room.databaseBuilder(getContext(), AppDatabase.class, "database")
-            .allowMainThreadQueries().build();
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -104,7 +97,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
     }
 
-
     /**
      *
      * @param hour is the hour to be formatted
@@ -125,4 +117,6 @@ public class TaskAdapter extends ArrayAdapter<Task> {
             minuteStr= "0"+minute;
         return hourStr+" : " + minuteStr;
     }
+
+
 }

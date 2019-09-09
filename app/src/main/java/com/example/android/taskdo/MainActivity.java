@@ -14,13 +14,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
+
     private static final String TAG = "MainActivity";
-
-    OnTableNukedListener callback;
-
-    public void setOnTableNukedListener(OnTableNukedListener callback) {
-        this.callback = callback;
-    }
 
 
     @Override
@@ -29,21 +24,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        //Database
-        //Database?!
+        //DATABASE
         final AppDatabase db = Room.databaseBuilder(this, AppDatabase.class, "database")
                 .allowMainThreadQueries().build();
 
 
-        //FAB to remove all tasks
-        FloatingActionButton removeTasksFab = findViewById(R.id.remove_tasks_fab);
-
-
+        //TAB LAYOUT
         // Find the view pager that will allow the user to swipe between fragments
         final ViewPager viewPager = findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
+        final SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
 
         // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
@@ -58,15 +49,23 @@ public class MainActivity extends AppCompatActivity {
         //      by calling onPageTitle()
         tabLayout.setupWithViewPager(viewPager);
 
-        /*
-            TRYING AGAIN
-        */
 
+        //Finds the FAButton to add a new task and sets a listener on it
         FloatingActionButton addTaskFab = findViewById(R.id.add_task_fab);
         addTaskFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Starts intent to add a new Task in that day!
                 addTaskIntent(viewPager.getCurrentItem());
+            }
+        });
+
+        //Finds FAButton to remove all tasks
+        FloatingActionButton removeTasksFab = findViewById(R.id.remove_tasks_fab);
+        removeTasksFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NukeAllTasks(db);
             }
         });
 
@@ -85,10 +84,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Requests a confirmation from the user before deleting everything
      *
-     * @param view view?
-     * @param db   is the database where all entries are stored
+     * @param db is the database where all entries are stored
      */
-    public void showAlertNukeButtonClicked(View view, final AppDatabase db) {
+    public void NukeAllTasks(final AppDatabase db) {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //Set the title and message of the dialog
@@ -100,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Deletes all entries in the Database
                 db.TaskDao().nukeTable();
+                //Restart Activity to reload the database
+                recreate();
             }
         });
         //Negative button does nothing
@@ -108,7 +108,6 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 
 }
 

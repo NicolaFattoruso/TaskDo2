@@ -32,5 +32,7 @@ public interface TaskDao {
     @Query("SELECT * FROM tasks WHERE day = :day")
     List<Task> getTasksByDay(int day);
 
+    @Query("DELETE FROM tasks WHERE day = :day")
+    void deleteTasksByDay(int day);
 
 }

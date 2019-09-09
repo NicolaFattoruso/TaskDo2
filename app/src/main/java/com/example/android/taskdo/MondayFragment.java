@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
@@ -19,13 +18,15 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MondayFragment extends Fragment implements OnTableNukedListener{
+public class MondayFragment extends Fragment {
 
     private static final String TAG = "MondayFragment";
 
     private static final int DAY = 0;
 
-    List<Task> taskList;
+    private List<Task> taskList;
+
+    private TaskAdapter taskAdapter;
 
 
     public MondayFragment() {
@@ -46,17 +47,16 @@ public class MondayFragment extends Fragment implements OnTableNukedListener{
         //Loads the tasks from the database
         taskList = db.TaskDao().getTasksByDay(DAY);
 
-
         /*
-         * Create a {@link TaskAdapter}, whose data source is a list of
-         {@link Task}s. The adapter knows how to create list item views for each item
-         in the list. */
-        final TaskAdapter taskAdapter = new TaskAdapter(getActivity(), taskList);
+        * Create a {@link TaskAdapter}, whose data source is a list of
+        {@link Task}s. The adapter knows how to create list item views for each item
+        in the list. */
+        taskAdapter = new TaskAdapter(getActivity(), taskList);
+
 
         // Get a reference to the ListView, and attach the adapter to the listView.
         ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(taskAdapter);
-
 
 
         //Sets an onClickListener on each item of the ListView
@@ -77,7 +77,7 @@ public class MondayFragment extends Fragment implements OnTableNukedListener{
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Shows the user an Alert before deleting an item from the list
-                showAlertOnDeletion(view, db, taskAdapter, i);
+                showAlertOnDeletion(db, taskAdapter, i);
                 return true;
             }
         });
@@ -86,17 +86,13 @@ public class MondayFragment extends Fragment implements OnTableNukedListener{
         return rootView;
     }
 
-
-
-
     /**
-     * @param view view?
-     * @param db is the database with all items
+     * @param db          is the database with all items
      * @param taskAdapter is the adapter which takes care of displaying all tasks
-     * @param position  is the position in which the adapter is currently
+     * @param position    is the position in which the adapter is currently
      */
-    private void showAlertOnDeletion(View view, final AppDatabase db,
-                                    final TaskAdapter taskAdapter, final int position) {
+    private void showAlertOnDeletion(final AppDatabase db,
+                                     final TaskAdapter taskAdapter, final int position) {
 
         //Retrieve currentTask from adapter
         final Task currentTask = taskList.get(position);
@@ -123,9 +119,5 @@ public class MondayFragment extends Fragment implements OnTableNukedListener{
         dialog.show();
     }
 
-    @Override
-    public void onNukeButtonPressed() {
-        Toast.makeText(getActivity(), "Button has been pressed, Sir", Toast.LENGTH_SHORT).show();
-    }
 }
 
