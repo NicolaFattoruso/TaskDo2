@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -10,7 +9,7 @@
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_centerInParent="true"
         android:layout_margin="8dp"
         android:orientation="vertical">
@@ -22,7 +21,7 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_margin="1dp"
-            android:textColor="@color/primaryLightColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="12sp"
             tools:text="00:00" />
 
@@ -33,7 +32,7 @@
             android:layout_below="@id/time_textview"
             android:layout_centerHorizontal="true"
             android:text="AM"
-            android:textColor="@color/primaryLightColor"
+            android:textColor="@color/primaryTextColor"
             android:textSize="6sp"
             android:textStyle="bold" />
 
@@ -46,8 +45,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_margin="8dp"
-        android:layout_toLeftOf="@id/status_image"
-        android:layout_toRightOf="@id/time"
+        android:layout_toStartOf="@id/status_image"
+        android:layout_toEndOf="@id/time"
         android:textColor="@color/secondaryTextColor"
         android:textSize="24sp"
         tools:text="TaskName" />
@@ -57,9 +56,10 @@
         android:id="@+id/status_image"
         android:layout_width="24dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_gravity="center_vertical"
+        android:contentDescription="IconaStatus"
         android:layout_margin="8dp"
         android:src="@drawable/outline_assignment_black_24" />
 

@@ -108,6 +108,7 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
         this.minute = minute;
         TextView timePreview = findViewById(R.id.time_preview);
         timePreview.setText(formatTimePreview(hourOfDay, minute, DateFormat.is24HourFormat(this)));
+        timePreview.setTextColor(getResources().getColor(R.color.primaryTextColor));
     }
 
 
