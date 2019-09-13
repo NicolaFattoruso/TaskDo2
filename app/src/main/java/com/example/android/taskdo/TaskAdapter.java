@@ -10,6 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import java.util.List;
 
 public class TaskAdapter extends ArrayAdapter<Task> {
@@ -29,8 +31,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         super(context, 0, tasks);
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
 
         View listItemView = convertView;
 
@@ -50,8 +53,16 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         TextView amPm = listItemView.findViewById(R.id.am_pm);
 
         //variables to simplify notation
-        int currentHour = currentTask.getHour();
-        int currentMinute = currentTask.getMinute();
+        int currentHour;
+        int currentMinute;
+        if (currentTask != null) {
+            currentHour = currentTask.getHour();
+            currentMinute = currentTask.getMinute();
+        } else {
+            //TODO need to handle this exception
+            currentHour = 0;
+            currentMinute = 0;
+        }
 
         if (is24HourFormat) {
             //Removes am_pm TextView from the layout since user is using 24h format
@@ -59,9 +70,9 @@ public class TaskAdapter extends ArrayAdapter<Task> {
 
         } else {
             if (currentHour > 12 && currentHour < 25)
-                amPm.setText("PM");
+                amPm.setText(R.string.pm);
             else if (currentHour >= 0 && currentHour < 12)
-                amPm.setText("AM");
+                amPm.setText(R.string.am);
             else {
                 amPm.setVisibility(View.GONE);
             }
@@ -83,39 +94,38 @@ public class TaskAdapter extends ArrayAdapter<Task> {
         ImageView statusImageView = listItemView.findViewById(R.id.status_image);
 
         //Fixes the view according to the status of the task
-        taskName.setText(currentTask.getName());
-        if (currentTask.getTaskStatus() == true) {
-            taskName.setPaintFlags(taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            statusImageView.setImageResource(R.drawable.outline_assignment_turned_in_black_24);
-        } else {
-            taskName.setPaintFlags(taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-            taskName.setPaintFlags(taskName.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-            statusImageView.setImageResource(R.drawable.outline_assignment_24);
+        if (currentTask != null) {
+            taskName.setText(currentTask.getName());
+            if (currentTask.getTaskStatus()) {
+                taskName.setPaintFlags(taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                statusImageView.setImageResource(R.drawable.outline_assignment_turned_in_black_24);
+            } else {
+                taskName.setPaintFlags(taskName.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+                taskName.setPaintFlags(taskName.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+                statusImageView.setImageResource(R.drawable.outline_assignment_24);
+            }
         }
-
         return listItemView;
 
     }
 
     /**
-     *
-     * @param hour is the hour to be formatted
+     * @param hour   is the hour to be formatted
      * @param minute is the minute to be formatted
      * @return a string composed for the time
-     * with an added 0 in fron if hour/minute is less than 10
+     * with an added 0 in front if hour/minute is less than 10
      * e.g. : hour = 8, minute = 5, then returned string is : "08 : 05"
      * e.g. : hour = 5, minute = 20, then returned string is : "05 : 20" and so on..
      */
-    public static String formatTime(int hour, int minute)
-    {
+    private static String formatTime(int hour, int minute) {
         String hourStr = String.valueOf(hour);
         String minuteStr = String.valueOf(minute);
 
-        if(hour<10)
-            hourStr = "0"+hour;
-        if(minute<10)
-            minuteStr= "0"+minute;
-        return hourStr+" : " + minuteStr;
+        if (hour < 10)
+            hourStr = "0" + hour;
+        if (minute < 10)
+            minuteStr = "0" + minute;
+        return hourStr + " : " + minuteStr;
     }
 
 

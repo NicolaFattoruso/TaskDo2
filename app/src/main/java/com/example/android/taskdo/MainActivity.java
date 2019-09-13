@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         final ViewPager viewPager = findViewById(R.id.viewpager);
 
         // Create an adapter that knows which fragment should be shown on each page
-        final SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(this, getSupportFragmentManager());
+        final SimpleFragmentPagerAdapter adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager());
 
         // Set the adapter onto the view pager
         viewPager.setAdapter(adapter);
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param db is the database where all entries are stored
      */
-    public void NukeAllTasks(final AppDatabase db, final ViewPager viewPager) {
+    private void NukeAllTasks(final AppDatabase db, final ViewPager viewPager) {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //Set the title and message of the dialog

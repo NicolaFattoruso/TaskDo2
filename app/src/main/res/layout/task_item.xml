@@ -31,7 +31,7 @@
             android:layout_margin="4dp"
             android:layout_toEndOf="@id/time_textview"
             android:layout_centerVertical="true"
-            android:text="AM"
+            android:text="@string/am"
             android:textColor="@color/primaryTextColor"
             android:textSize="12sp" />
 
@@ -58,7 +58,7 @@
         android:layout_alignParentEnd="true"
         android:layout_centerInParent="true"
         android:layout_gravity="center_vertical"
-        android:contentDescription="IconaStatus"
+        android:contentDescription="@string/statusImageDescription"
         android:layout_margin="8dp"
         android:src="@drawable/outline_assignment_black_24" />
 

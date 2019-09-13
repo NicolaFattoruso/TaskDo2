@@ -22,11 +22,11 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
 
     private static final String TAG = "AddTaskActivity";
 
-    String taskName = "";
+    private String taskName = "";
     //Initializing hour and minute to not valid values,
     // so I can check whether they have been added or not
-    int hour = 25;
-    int minute = 61;
+    private int hour = 25;
+    private int minute = 61;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,7 +118,7 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
      * @param is24HourFormat true if the System is using 24h format, false otherwise
      * @return a formatted string for the time according to user locale
      */
-    public String formatTimePreview(int hour, int minute, boolean is24HourFormat) {
+    private String formatTimePreview(int hour, int minute, boolean is24HourFormat) {
         String hourStr = String.valueOf(hour);
         String minuteStr = String.valueOf(minute);
         String meridiem;

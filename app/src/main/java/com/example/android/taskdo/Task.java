@@ -118,13 +118,16 @@ public class Task {
     }
 
     //PUBLIC METHODS
+    @SuppressWarnings("RedundantIfStatement")
     public void changeTaskStatus() {
+        //noinspection PointlessBooleanExpression
         if (taskStatus == false)
             taskStatus = true;
         else
             taskStatus = false;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Task Name: " + name + "\nTask day: " + day;

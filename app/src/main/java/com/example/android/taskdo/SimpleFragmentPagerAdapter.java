@@ -1,7 +1,5 @@
 package com.example.android.taskdo;
 
-import android.content.Context;
-
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,12 +7,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    /** Context of the app */
-    private Context mContext;
-
-    public SimpleFragmentPagerAdapter(Context context, FragmentManager fragmentManager) {
+    public SimpleFragmentPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
-        mContext = context;
     }
 
     @Override

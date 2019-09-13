@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Task Do</string>
     <string name="insertTaskHint">Write the name of your next task:</string>
-    <string name="taskNameHint">Task name...</string>
+    <string name="taskNameHint">Task name…</string>
     <string name="addButton">Add</string>
     <string name="toDoListMainHeader" translatable="false">To Do List :</string>
     <string name="addTaskButton">Add Task</string>
@@ -17,6 +17,9 @@
     <string name="deleteAll">Delete everything</string>
     <string name="deleteSelection">Delete only this day</string>
     <string name="delete">Delete</string>
+    <string name="statusImageDescription">Task status</string>
+    <string name="am" translatable="false">AM</string>
+    <string name="pm" translatable="false">PM</string>
 
 
 </resources>

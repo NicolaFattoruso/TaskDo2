@@ -1,6 +1,7 @@
 package com.example.android.taskdo;
 
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
@@ -28,6 +30,7 @@ public class ThursdayFragment extends Fragment {
 
     private TaskAdapter taskAdapter;
 
+    private Context mContext;
 
     public ThursdayFragment() {
         // Required empty public constructor
@@ -35,13 +38,19 @@ public class ThursdayFragment extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.task_list, container, false);
 
         //Database?!
-        final AppDatabase db = Room.databaseBuilder(getContext(), AppDatabase.class, "database")
+        final AppDatabase db = Room.databaseBuilder(mContext , AppDatabase.class, "database")
                 .allowMainThreadQueries().build();
 
         //Loads the tasks from the database
@@ -94,29 +103,31 @@ public class ThursdayFragment extends Fragment {
     private void showAlertOnDeletion(final AppDatabase db,
                                      final TaskAdapter taskAdapter, final int position) {
 
-        //Retrieve currentTask from adapter
-        final Task currentTask = taskList.get(position);
+        if (getActivity() != null) {
+            //Retrieve currentTask from adapter
+            final Task currentTask = taskList.get(position);
 
-        // setup the alert builder
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        //Set title and message for the warning
-        builder.setTitle(getString(R.string.warning));
-        builder.setMessage(getString(R.string.deleteConfirmation) + currentTask.getName() + " ?");
-        // add the buttons
-        builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+            // setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            //Set title and message for the warning
+            builder.setTitle(getString(R.string.warning));
+            builder.setMessage(getString(R.string.deleteConfirmation) + currentTask.getName() + " ?");
+            // add the buttons
+            builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
 
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                //remove current entry from the database and from the List
-                db.TaskDao().deleteTasksById(currentTask.getID());
-                taskList.remove(position);
-                taskAdapter.notifyDataSetChanged();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.cancel), null);
-        // create and show the alert dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //remove current entry from the database and from the List
+                    db.TaskDao().deleteTasksById(currentTask.getID());
+                    taskList.remove(position);
+                    taskAdapter.notifyDataSetChanged();
+                }
+            });
+            builder.setNegativeButton(getString(R.string.cancel), null);
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
 }

@@ -17,4 +17,5 @@
     <string name="deleteAll">Elimina tutto</string>
     <string name="deleteSelection">Elimina solo questo giorno</string>
     <string name="delete">Elimina</string>
+    <string name="statusImageDescription">Stato dell\'obiettivo</string>
 </resources>
