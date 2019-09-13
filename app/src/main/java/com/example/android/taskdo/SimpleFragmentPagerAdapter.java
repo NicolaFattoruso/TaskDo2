@@ -21,13 +21,14 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position)
         {
-            case 0: return new MondayFragment();
-            case 1: return new TuesdayFragment();
-            case 2: return new WednesdayFragment();
-            case 3: return new ThursdayFragment();
-            case 4: return new FridayFragment();
-            case 5: return new SaturdayFragment();
-            case 6: return new SundayFragment();
+            case 0: return new NotesFragment();
+            case 1: return new MondayFragment();
+            case 2: return new TuesdayFragment();
+            case 3: return new WednesdayFragment();
+            case 4: return new ThursdayFragment();
+            case 5: return new FridayFragment();
+            case 6: return new SaturdayFragment();
+            case 7: return new SundayFragment();
 
 
             default: return null;
@@ -36,7 +37,7 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 7;
+        return 8;
     }
 
     @Nullable
@@ -44,13 +45,14 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     public CharSequence getPageTitle(int position) {
         switch (position)
         {
-            case 0: return "LUN";
-            case 1: return "MAR";
-            case 2: return "MER";
-            case 3: return "GIO";
-            case 4: return "VEN";
-            case 5: return "SAB";
-            case 6: return "DOM";
+            case 0: return "NOTE";
+            case 1: return "LUN";
+            case 2: return "MAR";
+            case 3: return "MER";
+            case 4: return "GIO";
+            case 5: return "VEN";
+            case 6: return "SAB";
+            case 7: return "DOM";
             default: return "DEF_PAGE_TITLE";
         }
     }

@@ -7,7 +7,6 @@
     <string name="addTaskButton">Add Task</string>
     <string name="tutorial">Tap on a task to mark it as done! Long press to delete it.</string>
     <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
     <string name="deleteConfirmation">"Would you like to continue deleting this entry: "</string>
     <string name="warning">Warning</string>
     <string name="nukeConfirmation">Would you like to continue deleting all entries?</string>
@@ -15,6 +14,9 @@
     <string name="insertTaskTime">When?</string>
     <string name="insertTimeHint">Press the clock icon to add a time for your task, press the button on the right to add it to your list!</string>
     <string name="timeNotSet">Time is not yet set!</string>
+    <string name="deleteAll">Delete everything</string>
+    <string name="deleteSelection">Delete only this day</string>
+    <string name="delete">Delete</string>
 
 
 </resources>

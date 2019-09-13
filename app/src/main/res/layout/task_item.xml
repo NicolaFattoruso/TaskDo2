@@ -18,23 +18,22 @@
             android:id="@+id/time_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_margin="1dp"
             android:textColor="@color/primaryTextColor"
-            android:textSize="12sp"
+            android:textSize="15sp"
             tools:text="00:00" />
 
         <TextView
             android:id="@+id/am_pm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/time_textview"
-            android:layout_centerHorizontal="true"
+            android:layout_margin="4dp"
+            android:layout_toEndOf="@id/time_textview"
+            android:layout_centerVertical="true"
             android:text="AM"
             android:textColor="@color/primaryTextColor"
-            android:textSize="6sp"
-            android:textStyle="bold" />
+            android:textSize="12sp" />
 
     </RelativeLayout>
 

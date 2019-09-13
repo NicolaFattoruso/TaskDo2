@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         removeTasksFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NukeAllTasks(db);
+                NukeAllTasks(db, viewPager);
             }
         });
 
@@ -86,19 +86,28 @@ public class MainActivity extends AppCompatActivity {
      *
      * @param db is the database where all entries are stored
      */
-    public void NukeAllTasks(final AppDatabase db) {
+    public void NukeAllTasks(final AppDatabase db, final ViewPager viewPager) {
         // setup the alert builder
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         //Set the title and message of the dialog
         builder.setTitle(getString(R.string.warning));
         builder.setMessage(getString(R.string.nukeConfirmation));
         // add positive and negative buttons and set corresponding actions
-        builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+        builder.setPositiveButton(getString(R.string.deleteAll), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 //Deletes all entries in the Database
                 db.TaskDao().nukeTable();
-                //Restart Activity to reload the database
+                //Restart Activity to reload the Database
+                recreate();
+            }
+        });
+        builder.setNeutralButton(getString(R.string.deleteSelection), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                //Delete all entries of that day from the Database
+                db.TaskDao().deleteTasksByDay(viewPager.getCurrentItem());
+                //Restart Activity to reload the Database
                 recreate();
             }
         });

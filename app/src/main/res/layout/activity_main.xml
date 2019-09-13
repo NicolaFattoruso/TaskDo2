@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <TextView
             android:layout_width="0dp"
@@ -27,7 +28,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
-            android:background="#80000000"
             android:src="@drawable/round_delete_sweep_black_48dp" />
 
     </LinearLayout>
@@ -39,7 +39,6 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingBottom="8dp"
-        android:background="#FFFFFF"
         android:text="@string/tutorial"
         android:textColor="@color/secondaryTextColor"
         android:textSize="16sp"
@@ -48,13 +47,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:background="#FFFFFF">
+        android:layout_marginBottom="8dp">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabMode="scrollable"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp" />
 

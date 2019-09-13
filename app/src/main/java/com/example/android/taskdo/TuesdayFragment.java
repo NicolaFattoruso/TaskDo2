@@ -21,7 +21,7 @@ import java.util.List;
 public class TuesdayFragment extends Fragment {
     private static final String TAG = "MondayFragment";
 
-    private static final int DAY = 1;
+    private static final int DAY = 2;
 
 
     private List<Task> taskList;

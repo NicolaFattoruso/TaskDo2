@@ -18,18 +18,18 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class WednesdayFragment extends Fragment {
+public class NotesFragment extends Fragment {
 
-    private static final String TAG = "WednesdayFragment";
+    private static final String TAG = "NotesFragment";
 
-    private static final int DAY = 3;
+    private static final int DAY = 0;
 
     private List<Task> taskList;
 
     private TaskAdapter taskAdapter;
 
 
-    public WednesdayFragment() {
+    public NotesFragment() {
         // Required empty public constructor
     }
 

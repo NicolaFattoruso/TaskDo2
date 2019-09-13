@@ -22,7 +22,7 @@ public class SundayFragment extends Fragment {
 
     private static final String TAG = "SundayFragment";
 
-    private static final int DAY = 6;
+    private static final int DAY = 7;
 
     private List<Task> taskList;
 
