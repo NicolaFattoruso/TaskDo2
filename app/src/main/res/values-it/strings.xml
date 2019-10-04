@@ -15,7 +15,7 @@
     <string name="insertTimeHint">Premi l\'icona dell\'orologio per aggiungere un orario al tuo obbiettivo, premi il bottone sulla destra per aggiungerlo alla tua lista!</string>
     <string name="timeNotSet">Non hai ancora inserito l\'orario!</string>
     <string name="deleteAll">Elimina tutto</string>
-    <string name="deleteSelection">Elimina solo questo giorno</string>
+    <string name="deleteSelection">Elimina solo questa scheda</string>
     <string name="delete">Elimina</string>
     <string name="statusImageDescription">Stato dell\'obiettivo</string>
 </resources>
