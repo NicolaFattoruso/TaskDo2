@@ -92,7 +92,6 @@ public class AddTaskActivity extends AppCompatActivity implements TimePickerDial
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(AddTaskActivity.this, MainActivity.class));
-
     }
 
     /**

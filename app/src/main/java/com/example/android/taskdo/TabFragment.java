@@ -2,7 +2,9 @@ package com.example.android.taskdo;
 
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,17 +12,19 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
 import java.util.List;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A simple {@link Fragment} subclass to display a single generic Tab.
  */
-public class SundayFragment extends TabFragment {
+@SuppressWarnings("unused")
+public class TabFragment extends Fragment {
 
-    private static final String TAG = "SundayFragment";
+    private static final String TAG = "TabFragment";
 
     private static int DAY;
 
@@ -31,13 +35,19 @@ public class SundayFragment extends TabFragment {
     private Context mContext;
 
 
-    public SundayFragment() {
+    public TabFragment() {
         // Required empty public constructor
     }
 
-    public SundayFragment(int day)
-    {
-        DAY = day;
+    public TabFragment(int day) {
+        if (day <= 7 && day >= 0) {
+            DAY = day;
+        }
+        else
+        {
+            Log.d(TAG,"Day used in fragment generation is not valid " +
+                    "(must be between 0 and 7)");
+        }
     }
 
     @Override
@@ -104,8 +114,36 @@ public class SundayFragment extends TabFragment {
      * @param position    is the position in which the adapter is currently
      */
     protected void showAlertOnDeletion(final AppDatabase db,
-                                       final TaskAdapter taskAdapter, final int position) {
-        super.showAlertOnDeletion(db, taskAdapter, position);
+                                     final TaskAdapter taskAdapter, final int position) {
+
+        if (getActivity() != null) {
+
+            //Retrieve currentTask from adapter
+            final Task currentTask = taskList.get(position);
+
+            // setup the alert builder
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            //Set title and message for the warning
+            builder.setTitle(getString(R.string.warning));
+            builder.setMessage(getString(R.string.deleteConfirmation) + currentTask.getName() + " ?");
+            // add the buttons
+            builder.setPositiveButton(getString(R.string.delete), new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    //remove current entry from the database and from the List
+                    db.TaskDao().deleteTasksById(currentTask.getID());
+                    taskList.remove(position);
+                    taskAdapter.notifyDataSetChanged();
+                }
+            });
+            builder.setNegativeButton(getString(R.string.cancel), null);
+            // create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 
+
 }
+

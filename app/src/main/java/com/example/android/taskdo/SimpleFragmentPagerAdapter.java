@@ -15,14 +15,14 @@ public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position)
         {
-            case 0: return new NotesFragment();
-            case 1: return new MondayFragment();
-            case 2: return new TuesdayFragment();
-            case 3: return new WednesdayFragment();
-            case 4: return new ThursdayFragment();
-            case 5: return new FridayFragment();
-            case 6: return new SaturdayFragment();
-            case 7: return new SundayFragment();
+            case 0: return new NotesFragment(0);
+            case 1: return new MondayFragment(1);
+            case 2: return new TuesdayFragment(2);
+            case 3: return new WednesdayFragment(3);
+            case 4: return new ThursdayFragment(4);
+            case 5: return new FridayFragment(5);
+            case 6: return new SaturdayFragment(6);
+            case 7: return new SundayFragment(7);
 
 
             default: return null;
