@@ -1,4 +1,4 @@
-package com.example.android.taskdo;
+package com.example.android.taskdo.Tabs;
 
 
 import android.content.Context;
@@ -13,14 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
+import com.example.android.taskdo.AppDatabase;
+import com.example.android.taskdo.R;
+import com.example.android.taskdo.TabFragment;
+import com.example.android.taskdo.Task;
+import com.example.android.taskdo.TaskAdapter;
+
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SaturdayFragment extends TabFragment {
+public class WednesdayFragment extends TabFragment {
 
-    private static final String TAG = "SaturdayFragment";
+    private static final String TAG = "WednesdayFragment";
 
     private static int DAY;
 
@@ -31,15 +37,13 @@ public class SaturdayFragment extends TabFragment {
     private Context mContext;
 
 
-    public SaturdayFragment() {
+    public WednesdayFragment() {
         // Required empty public constructor
     }
 
-    public SaturdayFragment(int day)
-    {
+    public WednesdayFragment(int day) {
         DAY = day;
     }
-
 
     @Override
     public void onAttach(Context context) {
@@ -90,7 +94,7 @@ public class SaturdayFragment extends TabFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Shows the user an Alert before deleting an item from the list
-                showAlertOnDeletion(db, taskAdapter, i);
+                showAlertOnDeletion(taskList, db, taskAdapter, i);
                 return true;
             }
         });
@@ -99,14 +103,5 @@ public class SaturdayFragment extends TabFragment {
         return rootView;
     }
 
-    /**
-     * @param db          is the database with all items
-     * @param taskAdapter is the adapter which takes care of displaying all tasks
-     * @param position    is the position in which the adapter is currently
-     */
-    protected void showAlertOnDeletion(final AppDatabase db,
-                                       final TaskAdapter taskAdapter, final int position) {
-        super.showAlertOnDeletion(db, taskAdapter, position);
-    }
 }
 

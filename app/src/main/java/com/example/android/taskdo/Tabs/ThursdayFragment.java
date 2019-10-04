@@ -1,4 +1,4 @@
-package com.example.android.taskdo;
+package com.example.android.taskdo.Tabs;
 
 
 import android.content.Context;
@@ -13,15 +13,20 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.room.Room;
 
+import com.example.android.taskdo.AppDatabase;
+import com.example.android.taskdo.R;
+import com.example.android.taskdo.TabFragment;
+import com.example.android.taskdo.Task;
+import com.example.android.taskdo.TaskAdapter;
+
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-@SuppressWarnings("unused")
-public class MondayFragment extends TabFragment {
+public class ThursdayFragment extends TabFragment {
 
-    private static final String TAG = "MondayFragment";
+    private static final String TAG = "ThursdayFragment";
 
     private static int DAY;
 
@@ -31,15 +36,15 @@ public class MondayFragment extends TabFragment {
 
     private Context mContext;
 
-
-    public MondayFragment() {
+    public ThursdayFragment() {
         // Required empty public constructor
     }
 
-    public MondayFragment(int day)
+    public ThursdayFragment(int day)
     {
         DAY = day;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -54,7 +59,7 @@ public class MondayFragment extends TabFragment {
         View rootView = inflater.inflate(R.layout.task_list, container, false);
 
         //Database?!
-        final AppDatabase db = Room.databaseBuilder(mContext, AppDatabase.class, "database")
+        final AppDatabase db = Room.databaseBuilder(mContext , AppDatabase.class, "database")
                 .allowMainThreadQueries().build();
 
         //Loads the tasks from the database
@@ -90,23 +95,13 @@ public class MondayFragment extends TabFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Shows the user an Alert before deleting an item from the list
-                showAlertOnDeletion(db, taskAdapter, i);
+                showAlertOnDeletion(taskList, db, taskAdapter, i);
                 return true;
             }
         });
 
 
         return rootView;
-    }
-
-    /**
-     * @param db          is the database with all items
-     * @param taskAdapter is the adapter which takes care of displaying all tasks
-     * @param position    is the position in which the adapter is currently
-     */
-    protected void showAlertOnDeletion(final AppDatabase db,
-                                       final TaskAdapter taskAdapter, final int position) {
-        super.showAlertOnDeletion(db, taskAdapter, position);
     }
 
 }

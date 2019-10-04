@@ -99,7 +99,7 @@ public class TabFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 //Shows the user an Alert before deleting an item from the list
-                showAlertOnDeletion(db, taskAdapter, i);
+                showAlertOnDeletion(taskList, db, taskAdapter, i);
                 return true;
             }
         });
@@ -113,7 +113,7 @@ public class TabFragment extends Fragment {
      * @param taskAdapter is the adapter which takes care of displaying all tasks
      * @param position    is the position in which the adapter is currently
      */
-    protected void showAlertOnDeletion(final AppDatabase db,
+    protected void showAlertOnDeletion(final List<Task> taskList, final AppDatabase db,
                                      final TaskAdapter taskAdapter, final int position) {
 
         if (getActivity() != null) {

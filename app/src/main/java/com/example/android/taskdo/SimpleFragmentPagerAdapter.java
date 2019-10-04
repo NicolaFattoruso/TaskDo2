@@ -5,6 +5,15 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.android.taskdo.Tabs.FridayFragment;
+import com.example.android.taskdo.Tabs.MondayFragment;
+import com.example.android.taskdo.Tabs.NotesFragment;
+import com.example.android.taskdo.Tabs.SaturdayFragment;
+import com.example.android.taskdo.Tabs.SundayFragment;
+import com.example.android.taskdo.Tabs.ThursdayFragment;
+import com.example.android.taskdo.Tabs.TuesdayFragment;
+import com.example.android.taskdo.Tabs.WednesdayFragment;
+
 public class SimpleFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public SimpleFragmentPagerAdapter(FragmentManager fragmentManager) {
