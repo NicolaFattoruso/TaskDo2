@@ -1,3 +1,5 @@
 # TaskDo2
 
-App to keep track of daily tasks
+Very simple app to keep track of daily tasks on a weekly schedule.
+
+![](TaskDo2/app/src/main/res/drawable/ReadMe_Screenshot.jpg)
