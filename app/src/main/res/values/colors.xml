@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#37464f</color>
-    <color name="colorPrimaryDark">#101f27</color>
-    <color name="colorAccent">#f9c02d</color>
+    <!--<color name="colorPrimary">#37464f</color>-->
+    <!--<color name="colorPrimaryDark">#101f27</color>-->
+    <!--<color name="colorAccent">#f9c02d</color>-->
+
+    <color name="colorPrimary">#fafafa</color>
+    <color name="colorPrimaryDark">#c7c7c7</color>
+    <color name="colorAccent">#ffc107</color>
 
 
-    <color name="primaryColor">#37464f</color>
-    <color name="primaryLightColor">#62717b</color>
-    <color name="primaryDarkColor">#101f27</color>
-    <color name="secondaryColor">#f9c02d</color>
-    <color name="secondaryLightColor">#fff263</color>
-    <color name="secondaryDarkColor">#c29000</color>
-    <color name="primaryTextColor">#ffffff</color>
+    <!--<color name="primaryColor">#37464f</color>-->
+    <!--<color name="primaryLightColor">#62717b</color>-->
+    <!--<color name="primaryDarkColor">#101f27</color>-->
+    <!--<color name="secondaryColor">#f9c02d</color>-->
+    <!--<color name="secondaryLightColor">#fff263</color>-->
+    <!--<color name="secondaryDarkColor">#c29000</color>-->
+    <!--<color name="primaryTextColor">#ffffff</color>-->
+    <!--<color name="secondaryTextColor">#000000</color>-->
+
+    <color name="primaryColor">#fafafa</color>
+    <color name="primaryLightColor">#ffffff</color>
+    <color name="primaryDarkColor">#c7c7c7</color>
+    <color name="secondaryColor">#ffc107</color>
+    <color name="secondaryLightColor">#fff350</color>
+    <color name="secondaryDarkColor">#c79100</color>
+    <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#000000</color>
+
+
 </resources>

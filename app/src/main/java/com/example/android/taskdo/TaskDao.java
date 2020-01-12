@@ -1,10 +1,8 @@
 package com.example.android.taskdo;
 
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
-import androidx.room.Update;
 
 import java.util.List;
 
@@ -26,10 +24,15 @@ public interface TaskDao {
 
 
     @Query("DELETE FROM tasks WHERE id = :id")
-    void deleteTaskById(Long id);
+    void deleteTasksById(Long id);
 
     @Query("DELETE FROM tasks")
     void nukeTable();
 
+    @Query("SELECT * FROM tasks WHERE day = :day")
+    List<Task> getTasksByDay(int day);
+
+    @Query("DELETE FROM tasks WHERE day = :day")
+    void deleteTasksByDay(int day);
 
 }

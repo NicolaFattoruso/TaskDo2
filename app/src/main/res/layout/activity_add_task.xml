@@ -21,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:inputType="text"
         android:hint="@string/taskNameHint"
         android:textSize="16sp" />
 
@@ -39,7 +40,7 @@
             android:id="@+id/add_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_margin="8dp"
             android:src="@drawable/round_done_black_48dp" />
 
@@ -48,8 +49,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toRightOf="@id/add_time_fab"
-            android:layout_toLeftOf="@id/add_fab"
+            android:layout_toEndOf="@id/add_time_fab"
+            android:layout_toStartOf="@id/add_fab"
             android:gravity="center_horizontal"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
@@ -59,7 +60,7 @@
             android:id="@+id/add_time_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_margin="8dp"
             app:srcCompat="@drawable/baseline_access_time_24" />
 
